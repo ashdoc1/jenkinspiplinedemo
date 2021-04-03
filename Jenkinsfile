@@ -8,8 +8,8 @@ pipeline {
       }
       stage('Verify Branch') {
         steps {
-          echo "$GIT_BRANCH"
-          echo "$WORKSPACE"
+          echo "GIT_BRANCH: $GIT_BRANCH"
+          echo "WORKSPACE: $WORKSPACE"
         }
       }
       stage('Back-end') {
