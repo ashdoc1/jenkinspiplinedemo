@@ -14,7 +14,7 @@ pipeline {
       }
       stage('Back-end') {
 				agent {
-						docker { image 'node:14-alpine' }
+						docker { image 'nginx' }
 				}
 				stages {
 						stage('Test') {
