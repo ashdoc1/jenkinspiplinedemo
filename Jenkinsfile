@@ -10,6 +10,8 @@ pipeline {
         steps {
           echo "GIT_BRANCH: $GIT_BRANCH"
           echo "WORKSPACE: $WORKSPACE"
+          ls -lrt
+          docker ls
         }
       }
       stage('Back-end') {
@@ -17,6 +19,7 @@ pipeline {
                 docker { image 'maven:3-alpine' }
             }
             steps {
+                echo "pwd: " pwd
                 sh 'mvn --version'
             }
         }
