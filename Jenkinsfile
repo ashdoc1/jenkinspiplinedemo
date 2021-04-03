@@ -19,7 +19,6 @@ pipeline {
                 docker { image 'maven:3-alpine' }
             }
             steps {
-                echo "pwd: " pwd
                 sh 'mvn --version'
             }
         }
