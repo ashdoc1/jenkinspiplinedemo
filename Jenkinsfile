@@ -4,7 +4,7 @@ pipeline {
     RELEASE='20.04'
     CREDENTIALS_ID = 'gg-csr-project'
     BUCKET = 'gg-tf-state-test'
-    TTL = '10'
+    PATTERN = 'test-results.txt'
   }
     stages {
       stage('one') {    
@@ -76,7 +76,8 @@ pipeline {
     post{
       always {
             echo 'Prints whether deploy happened or not, success or failure'
-            step([$class: 'ExpiringBucketLifecycleManagerStep', credentialsId: env.CREDENTIALS_ID, bucket: "gs://${env.BUCKET}", ttl: env.TTL])
+           // step([$class: 'ExpiringBucketLifecycleManagerStep', credentialsId: env.CREDENTIALS_ID, bucket: "gs://${env.BUCKET}", ttl: env.TTL])
+            step([$class: 'StdoutUploadStep', credentialsId: env.CREDENTIALS_ID,  bucket: "gs://${env.BUCKET}", logName: env.PATTERN])
       }
       success {
          archiveArtifacts 'test-results.txt'  
