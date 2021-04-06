@@ -20,7 +20,7 @@ pipeline {
           echo "log level is $LOG_LEVEL"
         }
       }
-      stage {
+      stage ('deploy'){
         steps {
           echo "Deploying release ${RELEASE}" // to environment ${TARGET_ENVIRONMENT}
         }
