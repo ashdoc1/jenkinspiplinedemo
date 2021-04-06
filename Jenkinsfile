@@ -7,9 +7,14 @@ pipeline {
         }
       }
       stage('Verify Branch') {
+        environment {
+          LOG_LEVEL='INFO'
+
+        }
         steps {
           echo "GIT_BRANCH: $GIT_BRANCH"
           echo "WORKSPACE: $WORKSPACE"
+          echo "log level is $LOG_LEVEL"
         }
       }
       stage('Back-end') {
