@@ -20,7 +20,7 @@ pipeline {
           echo "log level is $LOG_LEVEL"
         }
       }
-      stage('deploy'){
+      stage('deploy') {
         input {
           message 'deploy it?'
           ok 'do it'
@@ -28,7 +28,7 @@ pipeline {
             string (name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment Environment')
           }
           steps {
-            echo "deploying release to $RELEASE to environment $TARGET_ENVIRONMENT"
+            echo "deploying release to ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
           }
         }
       }
