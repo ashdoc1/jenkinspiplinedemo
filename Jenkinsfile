@@ -24,21 +24,16 @@ pipeline {
 				agent {
 						docker { image 'nginx' }
 				}
-				stages {
-						stage('Test') {
-								steps {
-										sh 'node --version'
-								}
-						}
+				steps {
+					sh 'node --version'
 				}
-
       }
       stage ('deploy'){
         input {
           message 'deploy it?'
           ok 'do it'
           parameters{
-            string (name: 'TARGET_ENVIRONMENT', defautlVaule: 'PROD', description: 'Target deployment Environment')
+            string (name: 'TARGET_ENVIRONMENT', defaultVaule: 'PROD', description: 'Target deployment Environment')
 
           }
           steps{
