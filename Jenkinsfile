@@ -39,6 +39,7 @@ pipeline {
               stage('windows-amd64') {
                   steps {
                       echo "Building release ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                      sh pwd
                       sh 'chmod +x scripts/buid.sh'
                       withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]){
                         sh  '''
