@@ -28,6 +28,7 @@ pipeline {
               stage('linux-arm64') {
                   steps {
                       echo "Building release ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                      sh 'chmod +x scripts/build.sh'
                   }
               }
               stage('linux-amd64') {
@@ -38,6 +39,12 @@ pipeline {
               stage('windows-amd64') {
                   steps {
                       echo "Building release ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                      sh 'chmod +x scripts/buid.sh'
+                      withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]){
+                        sh  '''
+                          ./scripts/build.sh
+                        '''
+                      }
                   }
               }
           }
@@ -57,7 +64,7 @@ pipeline {
       stage('Testing'){
         steps {
           echo "Testing release ${RELEASE}"
-          writeFile file: 'test-results.txt', text: 'passed'               
+          writeFile file: 'test-results.txt', text: 'passed'       
         }
       }
     }
