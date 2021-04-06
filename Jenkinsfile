@@ -62,10 +62,19 @@ pipeline {
 					sh 'node --version'
 				}
       }
+      stage('Testing'){
+        steps {
+          echo "Testing release ${RELEASE}"
+          writeFile file: 'test-results.txt', text: 'passed'               
+        }
+      }
     }
     post{
-        always {
-             echo 'Prints whether deploy happened or not, success or failure'
-        }
+      always {
+            echo 'Prints whether deploy happened or not, success or failure'
+      }
+      success {
+         archiveArtifacts 'test-results.txt'
+      }
     }
 }
