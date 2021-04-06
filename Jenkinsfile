@@ -21,6 +21,10 @@ pipeline {
         }
       }
       stage ('deploy'){
+        input {
+          message 'Deploy?'
+          ok 'do it!'
+        }
         steps {
           echo "Deploying release ${RELEASE}" // to environment ${TARGET_ENVIRONMENT}
         }
