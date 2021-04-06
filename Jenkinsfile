@@ -2,6 +2,9 @@ pipeline {
   agent any
   environment {
     RELEASE='20.04'
+    CREDENTIALS_ID = 'gg-csr-project'
+    BUCKET = 'gg-tf-state-test'
+    TTL = '10'
   }
     stages {
       stage('one') {    
@@ -73,9 +76,10 @@ pipeline {
     post{
       always {
             echo 'Prints whether deploy happened or not, success or failure'
+            step([$class: 'ExpiringBucketLifecycleManagerStep', credentialsId: env.CREDENTIALS_ID, bucket: "gs://${env.BUCKET}", ttl: env.TTL])
       }
       success {
-         archiveArtifacts 'test-results.txt'
+         archiveArtifacts 'test-results.txt'  
          slackSend channel: '#jenkins', message: "Release ${RELEASE}, success: ${currentBuild.fullDisplayName}"
       }
     }
