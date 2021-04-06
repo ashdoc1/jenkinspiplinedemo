@@ -20,18 +20,6 @@ pipeline {
           echo "log level is $LOG_LEVEL"
         }
       }
-      stage('deploy') {
-        input {
-          message 'deploy it?'
-          ok 'do it'
-          parameters{
-            string (name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment Environment')
-          }
-          steps {
-            echo "deploying release to ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
-          }
-        }
-      }
       stage('Back-end') {
 				agent {
 						docker { image 'nginx' }
