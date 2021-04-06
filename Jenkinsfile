@@ -20,8 +20,7 @@ pipeline {
           echo "log level is $LOG_LEVEL"
         }
       }
-    stages {
-      stage('Build') {
+      stage ('Build') {
           environment {
               LOG_LEVEL='INFO'
           }
