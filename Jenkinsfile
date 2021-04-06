@@ -41,7 +41,7 @@ pipeline {
                       echo "Building release ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
                       sh 'pwd'
                       sh 'ls -lrt'
-                      sh 'chmod +x scripts/buid.sh'
+                      sh 'chmod +x scripts/build.sh'
                       withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY')]){
                         sh  '''
                           ./scripts/build.sh
