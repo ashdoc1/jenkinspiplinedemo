@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    RELEASE='20.04'
+  }
     stages {
       stage('one') {    
         steps {
@@ -28,6 +31,20 @@ pipeline {
 								}
 						}
 				}
+      }
+      stage {
+        input {
+          message 'deploy it?'
+          ok 'do it'
+          parameters{
+            string (name: 'TARGET_ENVIRONMENT', defautlVaule: 'PROD', description: 'Target deployment Environment')
+
+          }
+          steps{
+            echo "deploying release to $RELEASE to environment $TARGET_ENVIRONMENT"
+          }
+        }
+
       }
     }
 }
