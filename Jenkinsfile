@@ -54,14 +54,6 @@ pipeline {
           echo "Deploying release ${RELEASE} to environment ${TARGET_ENVIRONMENT}"
         }
       }
-      stage('Back-end') {
-				agent {
-						docker { image 'nginx' }
-				}
-				steps {
-					sh 'node --version'
-				}
-      }
       stage('Testing'){
         steps {
           echo "Testing release ${RELEASE}"
